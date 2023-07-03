@@ -13,12 +13,12 @@ mod entity;
 mod utils;
 mod router;
 
-pub static GLOBAL_DB: Lazy<Rbatis> = Lazy::new(|| Rbatis::new());
+pub static GLOBAL_DB: Lazy<Rbatis> = Lazy::new(Rbatis::new);
 
 pub static GLOBAL_REDIS:Lazy<Client> = Lazy::new(||{
     let client = redis::Client::open("redis://127.0.0.1/").expect("连接redis失败");
     client.get_connection().unwrap();
-    return client;
+    client
 });
 
 #[tokio::main]
